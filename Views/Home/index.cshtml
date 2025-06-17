@@ -1,0 +1,24 @@
+<!-- <etmodel string> model geleceğini ve gelen modelin string olacağını söylüyor. -->
+
+
+@model MeetingInfo
+@{
+ViewBag.Title="Toplantı Başvuru"; <!-- Burası ile Layout sayfasının title sinde kullanmak üzere veri gönderiyoruz-->
+<!-- bu sayfa için Layout olarak Layout2 yi kullan -->
+Layout="_Layout2";
+}
+<main class="text-center">
+    <!-- <h1 class="h4">@Model</h1>  Gelen modeli buraya yaz -->
+    <h1 class="h4 text-center">@ViewBag.selamlama</h1>
+    <!-- Bu kullanım ile artık kullanacağımız değeri model olarak göndermemize gerek kalmıyor. Direkt erişim.-->
+
+    <p>Toplanti Katilim Durumunuzu Bildiriniz</p>
+    <div class="card my-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Model.Location adresinde gerçekleşecek.</li>
+            <li class="list-group-item">@Model.Date.ToString("dd/MM/yyyy HH:mm:ss") tarihinde gerçekleşecek.</li>
+            <li class="list-group-item">@Model.NumberOfPeople katılımcı </li>
+        </ul>
+    </div>
+    <a class="btn btn-sm btn-outline-primary" asp-controller="Meeting" asp-action="apply">Başvuru Yap</a>
+</main>
