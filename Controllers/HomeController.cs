@@ -26,13 +26,14 @@ namespace MeetingApp.Controllers
                 ViewBag.selamlama = "İyi Geceler";
             }
             //return View(model: selamlama); //model: yazmazsan model olarak geleceğini anlamaz ve index/gelen_string olarak sayfa açmaya çalışır. çünkü gönderilen değer string
+            int userCount = Repository.Users.Where(info => info.WillAttend == true).Count(); //Repository sınıfındaki Users listesinden WillAttend özelliği true olan kullanıcıların sayısını alıyoruz. .Where bir koşul belirler ve bu koşula uyanları filtreler. Count ise bu filtrelenmiş listenin eleman sayısını döndürür.
 
             var meetingInfo = new MeetingInfo() //MeetingInfo class ının özelliklerini taşıyan bir obje,nesne oluşturduk.
             {
                 Id = 1,
                 Location = "Ankara, Savunma Sanayi Bakanligi 301 Uluğ Bey Kongre Salonu",
                 Date = new DateTime(2025, 07, 17, 20, 0, 0),
-                NumberOfPeople = 100
+                NumberOfPeople = userCount
             };
 
             return View(meetingInfo); //gönderdiğin string değilse direk objeyi bu şekilde gönderebilirsin.

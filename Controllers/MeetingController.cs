@@ -20,7 +20,7 @@ namespace MeetingApp.Controllers
         }
         public IActionResult list()
         {
-            return View();
+            return View(Repository.Users);
         }
     }
 }
