@@ -9,9 +9,17 @@ namespace MeetingApp.Controllers
         [HttpPost]
         public IActionResult Apply(UserInfo Model)
         {
-            Repository.CreateUser(Model);
-            ViewBag.UserCount = Repository.Users.Where(info => info.WillAttend == true).Count();
-            return View("thanks", Model);
+            if (ModelState.IsValid) // UserInfo modelinden required alanların hepsi kontrol ediliyor. Boş yok ise hepsi true geliyorsa bu blok çalışıyor.
+            {
+                Repository.CreateUser(Model);
+                ViewBag.UserCount = Repository.Users.Where(info => info.WillAttend == true).Count();
+                return View("thanks", Model);
+            }
+            else
+            {
+                return View(Model); // ModelState geçerli değilse, yani required alanlardan biri boş ise, model tekrar view'a gönderiliyor.
+            }
+
         }
         [HttpGet]
         public IActionResult Apply()
@@ -21,6 +29,10 @@ namespace MeetingApp.Controllers
         public IActionResult list()
         {
             return View(Repository.Users);
+        }
+        public IActionResult Details(int id)
+        {
+            return View(Repository.GetById(id));
         }
     }
 }

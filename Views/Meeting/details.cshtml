@@ -1,0 +1,31 @@
+@model UserInfo
+@{
+
+ViewBag.Title="Başvuru Detayı";
+var ktlClass ="";
+var durum="";
+if(Model.WillAttend == true)
+{
+ktlClass="bg-success";
+durum ="Katılacak";
+}
+else
+{
+ktlClass="bg-danger";
+durum ="Katılmayacak";
+}
+}
+<main class="text-center">
+    <h1 class="h4  @ktlClass card">Başvuru Detayı</h1>
+
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Ad:</strong> @Model.Name</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Telefon:</strong> @Model.Phone</p>
+            <p><strong>Katılım Durumu:</strong> @durum</p>
+        </div>
+    </div>
+
+    <a class="btn btn-sm btn-outline-primary mt-3" href="/meeting/list">Katilimcilari Goruntule</a>
